@@ -1,0 +1,54 @@
+From fbdac56ccff68272317138c7627f958de89aef46 Mon Sep 17 00:00:00 2001
+From: wjyrich <1071633242@qq.com>
+Date: Fri, 9 Aug 2024 15:57:37 +0800
+Subject: [PATCH] install
+
+---
+ ShotX.desktop | 11 +++++++++++
+ ShotX.pro     | 10 +++++++++-
+ 2 files changed, 20 insertions(+), 1 deletion(-)
+ create mode 100644 ShotX.desktop
+
+diff --git a/ShotX.desktop b/ShotX.desktop
+new file mode 100644
+index 0000000..2741800
+--- /dev/null
++++ b/ShotX.desktop
+@@ -0,0 +1,11 @@
++[Desktop Entry]
++Categories=Accessibility;Qt;Utility;
++Exec=ShotX
++Name=ShotX
++Name[zh_CN]=ShotX
++Icon=ShotX
++StartupNotify=false
++Terminal=false
++Type=Application
++GenericName=ShotX
++Version=1.1.0
+diff --git a/ShotX.pro b/ShotX.pro
+index fd617c4..ffadac7 100644
+--- a/ShotX.pro
++++ b/ShotX.pro
+@@ -31,9 +31,17 @@ include(./3rdparty/QHotkey/qhotkey.pri)
+ 
+ # Default rules for deployment.
+ qnx: target.path = /tmp/$${TARGET}/bin
+-else: unix:!android: target.path = /opt/$${TARGET}/bin
++else: unix:!android: #target.path = /opt/$${TARGET}/bin
+ !isEmpty(target.path): INSTALLS += target
+ 
++target.path = $$PREFIX/bin
++desktop.files = ShotX.desktop
++desktop.path = $$PREFIX/share/applications/
++icons.path = $$PREFIX/share/icons/hicolor/scalable/apps
++icons.files = icons/ShotX.svg
++
++INSTALLS += target desktop icons
++
+ RESOURCES += Resources.qrc
+ 
+ FORMS += \
+-- 
+2.43.4
+
