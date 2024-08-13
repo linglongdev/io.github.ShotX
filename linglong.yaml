@@ -1,0 +1,29 @@
+version: "1"
+
+package:
+  id: io.github.ShotX
+  name: ShotX
+  version: 0.0.0.1
+  kind: app
+  description: |
+    一款极简的截图工具(支持 Win，Mac，Linux)
+
+command:
+  - /opt/apps/io.github.ShotX/files/bin/ShotX
+
+base: org.deepin.foundation/23.0.0
+runtime: org.deepin.Runtime/23.0.1
+
+sources:
+  - kind: git
+    url: https://github.com/SunnyScreenshot/ShotX.git
+    version: master
+    commit: 82e5b94430dc4315656e410fcc931989ff48f29b
+
+build: |
+  cd /project/linglong/sources/ShotX.git
+  cp icons/logo.svg  icons/ShotX.svg 
+  git apply ../../../0001-install.patch
+  qmake -makefile PREFIX=${PREFIX} LIB_INSTALL_DIR=${PREFIX}/lib/${TRIPLET}
+  make
+  make install
